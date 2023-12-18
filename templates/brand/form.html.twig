@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ProductController!
+{% endblock %}
+
+{% block body %}
+	<!-- content start -->
+	<div class="container-fluid">
+		<div class="row text-center">
+			<div class="col-12 text-center mb-5 mt-5">
+				<h2 class="text-center">{{title}}</h2>
+			</div>
+		</div>
+		<div class="row justify-content-center">
+			<div class="col-4 text-center mx-auto">
+				{% for type, messages in app.flashes() %}
+					{% for message in messages %}
+						<div class="alert alert-{{ type }}">
+							{{ message }}
+						</div>
+					{% endfor %}
+				{% endfor %}
+				{{ form_start(form) }}
+				<div class="form-group">
+					{{ form_widget(form.name,{
+					'attr':{
+						'class':'form-control',
+						'type': 'text',
+						'placeholder' : 'Brand name'
+					}
+				}) }}
+					<a name="" id="" class="btn btn-secondary mt-3" href="{{path('app_brand')}}" role="button">Back</a>
+					<button type="submit" class="btn btn-primary mt-3">Save</button>
+				</div>
+				{{ form_end(form) }}
+			</div>
+		</div>
+
+	</div>
+	<!-- content end -->
+{% endblock %}

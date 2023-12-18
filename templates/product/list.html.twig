@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ProductController!{% endblock %}
+
+{% block body %}
+    <!-- content start -->
+    <div class="container-fluid">
+        <div class="row text-center">
+            <div class="col-12 text-center mb-5 mt-5">
+                <h2 class="text-center">Product List</h2>
+            </div>
+        </div>
+        <div class="text-right mb-1">
+            <a name="" id="" class="btn btn-primary" href="{{path('create_product')}}" role="button">Add Product</a>
+        </div>
+        <div class="row">
+            <div class="col-12 text-center">
+                {% for type, messages in app.flashes() %}
+					{% for message in messages %}
+						<div class="alert alert-{{ type }}">
+							{{ message }}
+						</div>
+					{% endfor %}
+				{% endfor %}
+                <table class="table">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Product Name</th>
+                            <th scope="col">Price</th>
+                            <th scope="col">Quantity</th>
+                            <th scope="col">Category</th>
+                            <th scope="col">Brand</th>
+                            <th scope="col">Image</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% set i = 0 %}
+                        {% for products in product %}
+                        {% set i = i + 1 %}
+                        <tr>
+                            <th scope="row">{{i}}</th>
+                            <td><b>{{products.name}}</b></td>
+                            <td>{{ products.price|number_format(0, ',', '.') }} VND</td>
+                            <td>{{products.qty}}</td>
+                            <td>{{products.category.title}}</td>
+                            <td>{{products.brand.name}}</td>
+                            <td><img src="{{products.image}}" style="height: 100px; width: auto; border-radius: 10px;"></td>
+                            <td class="text-center">
+                                <a name="" id="" class="btn btn-success" href="{{path('update_product',{'id':products.id})}}" role="button">Edit</a>
+                                <a name="" id="" class="btn btn-danger" href="{{path('destroy_product',{'id':products.id})}}" role="button">Remove</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <!-- content end -->
+{% endblock %}

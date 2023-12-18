@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HomeController!{% endblock %}
+
+{% block body %}
+    <!-- content start -->
+    <div class="container-fluid">
+        <div class="row text-center">
+            <div class="col-12 text-center mb-5 mt-5">
+                <h2 class="text-center">Product</h2>
+            </div>
+        </div>
+        <div class="row text-left">
+            {% for products in product %}
+            <div class="col-md-3 text-left">
+                <div class="card" style="width: 100%;">
+                    <img src="{{products.image}}"
+                        class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">{{products.name}}</h5>
+                        <p class="card-text"><b>Price: </b>{{ products.price|number_format(0, ',', '.') }} VND</p>
+                        <p class="card-text"><b>Brand: </b>{{products.brand.name}}</p>
+                        <p class="card-text"><b>Category: </b>{{products.category.title}}</p>
+                        <p class="card-text">{{products.description}}</p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
